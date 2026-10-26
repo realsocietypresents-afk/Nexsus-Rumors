@@ -1,0 +1,20 @@
+name: NexusRumors
+version: ${project.version}
+main: com.nexuscraft.nexusrumors.NexusRumorsPlugin
+api-version: '1.21'
+author: Nexus Universe
+description: A gossip economy. Villagers and players spread rumors about markets, dangers and whereabouts; some are true, some exaggerated.
+
+commands:
+  rumors:
+    description: "Rumors you have heard: read them, check them, pass them on."
+    aliases: [gossip]
+    usage: /rumors [number|tell|post|forget|ledger|hide|show]
+
+permissions:
+  nexusrumors.use:
+    description: Hear, read, check and pass on rumors.
+    default: true
+  nexusrumors.admin:
+    description: Reload, stats, report rumors by hand.
+    default: op

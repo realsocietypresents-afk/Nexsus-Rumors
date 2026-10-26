@@ -1,0 +1,111 @@
+# NexusRumors -- a gossip economy. Every rumor starts from something that really happened
+# (a villager gaining a notable trade, a death or a dangerous mob, a player seen near a village).
+# Villagers retell it, it drifts as it spreads, and you decide whom to trust.
+# Rumors only ever name a REGION (a square of region-size blocks around world spawn), never coordinates.
+
+enabled: true
+
+# Side length, in blocks, of one region. Rumors say "far east of spawn", never an exact place.
+region-size: 192
+
+# World names rumors may happen in. Empty = every normal (overworld-type) world.
+worlds: []
+
+# Most rumors a region's villagers can know at once, and across the whole server.
+max-rumors-per-region: 12
+max-rumors-total: 1000
+
+# How long a fact stays "current". After that a rumor about it is old news.
+ttl:
+  market-minutes: 720
+  danger-minutes: 180
+  sighting-minutes: 20
+  # Facts are kept this long past their end, so a player who checks a rumor late is told "too late" rather than "false".
+  keep-minutes: 120
+
+# Rumors travel between neighbouring regions.
+spread:
+  interval-minutes: 10
+  chance: 0.35
+  max-hops: 4
+  # Chance that a rumor changes as it hops to the next region.
+  mutation-chance: 0.5
+
+# Chance a villager changes one detail while telling a rumor (scaled by the villager's temperament).
+mutation:
+  retell-chance: 0.35
+
+# Hearing rumors: right-click a villager.
+hear:
+  require-sneak: true
+  cooldown-seconds: 90
+  # Rumors a player keeps in their notebook, and different tellings kept per rumor.
+  max-remembered: 30
+  max-versions: 6
+
+# Checking a rumor: stand in the region it names for this long.
+check:
+  seconds: 15
+  interval-seconds: 5
+
+# Players seen near villagers become "whereabouts" rumors -- by region only. /rumors hide opts out.
+sightings:
+  enabled: true
+  interval-seconds: 120
+  chance: 0.25
+  radius: 24
+  name-players: true
+
+# Markets: villagers gaining notable trades.
+market:
+  enabled: true
+  chance: 0.6
+  villager-cooldown-minutes: 30
+  notable-materials:
+    - DIAMOND_PICKAXE
+    - DIAMOND_SWORD
+    - DIAMOND_AXE
+    - DIAMOND_HELMET
+    - DIAMOND_CHESTPLATE
+    - DIAMOND_LEGGINGS
+    - DIAMOND_BOOTS
+    - SADDLE
+    - NAME_TAG
+    - BELL
+    - ENDER_PEARL
+  # Enchanted books worth gossiping about (enchantment keys, no namespace).
+  notable-enchants:
+    - mending
+    - unbreaking
+    - fortune
+    - sharpness
+    - protection
+    - efficiency
+    - silk_touch
+    - looting
+
+# Dangers: deaths and dangerous mobs.
+danger:
+  enabled: true
+  deaths: true
+  name-victims: false
+  pvp: false
+  mobs:
+    - WARDEN
+    - WITHER
+    - RAVAGER
+    - ELDER_GUARDIAN
+
+# Players passing rumors on.
+tell:
+  radius: 24
+  cooldown-seconds: 300
+  mutation-chance: 0.2
+post:
+  radius: 32
+
+# What checking a rumor pays. Commands run from the console; %player% is the player.
+rewards:
+  xp-true: 30
+  xp-exaggerated: 10
+  commands-true: []
